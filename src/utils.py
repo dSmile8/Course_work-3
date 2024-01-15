@@ -7,7 +7,6 @@ def open_file():
         data = json.load(file)
     return data
 
-data = open_file()
 
 def executed_operations(data):
     execut_operations = []
@@ -21,37 +20,42 @@ def executed_operations(data):
             empty_from.append(i)
     return empty_from
 
-exec_operations = executed_operations(data)
-# for u in exec_operations:
-#     print(u)
-print(exec_operations)
+def get_last_values(data, count_last_values):
+    data = sorted(data, key=lambda x: x["date"], reverse=True)
+    data = data[:count_last_values]
+    return data
 
-def enter_transaction():
+
+def enter_transaction(data):
     operations_list = []
-    for i in exec_operations:
-        for data in i:
-            date = datetime.fromisoformat(i['date']).strftime('%d.%m.%Y')  # меняем формат даты
-            description = i['description']  # описание типа перевода
-            from_last_elem = i['from'].split(' ')[-1]  # последний элемент строки "от кого"
-            to_last_elem = i['to'].split(' ')[-1]  # последний элемент строки "кому"
-            # print(' '.join(i['to'].split(' ')[0:-1]))
-            if len(from_last_elem) == 16:
-                from_ = ' '.join(i['from'].split(' ')[0:-1]) + ' ' + from_last_elem[0:4] + ' ' + from_last_elem[5:7] + '**' + ' **** ' + from_last_elem[-4:]
-            elif len(from_last_elem) == 20:
-                from_ = ' '.join(i['from'].split(' ')[0:-1]) + ' ' + '**' + from_last_elem[-4:]
-            else:
-                print('Длинна счета (20 цифр) либо номера карты (16 цифр) не верна')
-            if len(to_last_elem) == 16:
-                to = ' '.join(i['to'].split(' ')[0:-1]) + ' ' + to_last_elem[0:4] + ' ' + to_last_elem[5:7] + '**' + ' **** ' + to_last_elem[-4:]
-            elif len(to_last_elem) == 20:
-                to = ' '.join(i['to'].split(' ')[0:-1]) + ' ' + '**' + to_last_elem[-4:]
-            else:
-                print('Длинна счета (20 цифр) либо номера карты (16 цифр) не верна')
-            # to = i['to']
-            amount = i['operationAmount']['amount']
-            currency = i['operationAmount']['currency']['name']
-            return f'{date} {description}\n{from_} -> {to}\n{amount} {currency}\n\n '
-print(enter_transaction())
+    for i in data:
+        date = datetime.fromisoformat(i['date']).strftime('%d.%m.%Y')  # меняем формат даты
+        description = i['description']  # описание типа перевода
+        from_last_elem = i['from'].split(' ')[-1]  # последний элемент строки "от кого"
+        to_last_elem = i['to'].split(' ')[-1]  # последний элемент строки "кому"
+        if len(from_last_elem) == 16:
+            from_ = ' '.join(i['from'].split(' ')[0:-1]) + ' ' + from_last_elem[0:4] + ' ' + from_last_elem[5:7] + '**' + ' **** ' + from_last_elem[-4:]
+        elif len(from_last_elem) == 20:
+            from_ = ' '.join(i['from'].split(' ')[0:-1]) + ' ' + '**' + from_last_elem[-4:]
+        else:
+            print('Длинна счета (20 цифр) либо номера карты (16 цифр) не верна')
+        if len(to_last_elem) == 16:
+            to = ' '.join(i['to'].split(' ')[0:-1]) + ' ' + to_last_elem[0:4] + ' ' + to_last_elem[5:7] + '**' + ' **** ' + to_last_elem[-4:]
+        elif len(to_last_elem) == 20:
+            to = ' '.join(i['to'].split(' ')[0:-1]) + ' ' + '**' + to_last_elem[-4:]
+        else:
+            print('Длинна счета (20 цифр) либо номера карты (16 цифр) не верна')
+        amount = i['operationAmount']['amount']
+        currency = i['operationAmount']['currency']['name']
+        operations_list.append(f'{date} {description}\n{from_} -> {to}\n{amount} {currency} \n\n ')
+    return operations_list
+
+# print(enter_transaction(data))
+
+def date_sort(data):
+    pass
+
+
 #
 #
 #
