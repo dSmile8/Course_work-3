@@ -5,7 +5,7 @@ from datetime import datetime
 def open_file():
     """Открывает json файл и записывает его в переменную 'data' """
 
-    with open('operations.json', 'r', encoding='UTF-8') as file:
+    with open('../operations.json', 'r', encoding='UTF-8') as file:
         data = json.load(file)
     return data
 
@@ -15,6 +15,7 @@ def executed_operations(data):
 
     execut_operations = []
     empty_from = []
+    print(data)
     for i in data:
         for v in i.values():
             if v == 'EXECUTED':
@@ -43,18 +44,13 @@ def enter_transaction(data):
         from_last_elem = i['from'].split(' ')[-1]  # последний элемент строки "от кого"
         to_last_elem = i['to'].split(' ')[-1]  # последний элемент строки "кому"
         if len(from_last_elem) == 16:  # задаем условия для разных длинн счет/номер карты отправителя
-            from_ = ' '.join(i['from'].split(' ')[0:-1]) + ' ' + from_last_elem[0:4] + ' ' + from_last_elem[5:7] + '**' + ' **** ' + from_last_elem[-4:]
+            from_ = ' '.join(i['from'].split(' ')[0:-1]) + ' ' + from_last_elem[0:4] + ' ' + from_last_elem[4:6] + '**' + ' **** ' + from_last_elem[-4:]
         elif len(from_last_elem) == 20:  # задаем условия для разных длинн счет/номер карты отправителя
             from_ = ' '.join(i['from'].split(' ')[0:-1]) + ' ' + '**' + from_last_elem[-4:]
-        else:
-            print('Длинна счета (20 цифр) либо номера карты (16 цифр) не верна')
         if len(to_last_elem) == 16:  # задаем условия для разных длинн счет/номер карты получателя
-            to_ = ' '.join(i['to'].split(' ')[0:-1]) + ' ' + to_last_elem[0:4] + ' ' + to_last_elem[5:7] + '**' + \
-                 ' **** ' + to_last_elem[-4:]
+            to_ = ' '.join(i['to'].split(' ')[0:-1]) + ' ' + to_last_elem[0:4] + ' ' + to_last_elem[4:6] + '**' + ' **** ' + to_last_elem[-4:]
         elif len(to_last_elem) == 20:  # задаем условия для разных длинн счет/номер карты получателя
             to_ = ' '.join(i['to'].split(' ')[0:-1]) + ' ' + '**' + to_last_elem[-4:]
-        else:
-            print('Длинна счета (20 цифр) либо номера карты (16 цифр) не верна')
         amount = i['operationAmount']['amount']  # сумма перевода
         currency = i['operationAmount']['currency']['name']  # валюта
         operations_list.append(f'{date} {description}\n{from_} -> {to_}\n{amount} {currency} \n\n ')
