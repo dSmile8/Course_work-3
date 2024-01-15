@@ -2,9 +2,9 @@ from src.utils import open_file, executed_operations, get_last_values, enter_tra
 from src import main
 import json
 
-def test_main():
-    # main.main()
-    # assert True
+# def test_main():
+#     # main.main()
+#     # assert True
 
 def test_open_file():
     with open('operations.json', 'r', encoding='UTF-8') as file:
