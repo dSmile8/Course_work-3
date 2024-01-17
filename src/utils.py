@@ -11,19 +11,13 @@ def open_file():
 
 
 def executed_operations(data):
-    """Оставляем EXECUTED(выполненые операции) и убираем операции без поля отправитель(from)"""
+    """Оставляем EXECUTED(выполненные операции) и убираем операции без поля отправитель(from)"""
 
     execut_operations = []
-    empty_from = []
-    print(data)
-    for i in data:
-        for v in i.values():
-            if v == 'EXECUTED':
-                execut_operations.append(i)
-    for i in execut_operations:
-        if 'from' in i:
-            empty_from.append(i)
-    return empty_from
+    for v in data:
+        if 'state' in v and v['state'] == 'EXECUTED' and 'from' in v:
+            execut_operations.append(v)
+    return execut_operations
 
 def get_last_values(data, count_last_values):
     """Сортируем список по дате и оставляем последние несколько операций"""
@@ -55,59 +49,3 @@ def enter_transaction(data):
         currency = i['operationAmount']['currency']['name']  # валюта
         operations_list.append(f'{date} {description}\n{from_} -> {to_}\n{amount} {currency} \n\n ')
     return operations_list
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-
-
-
-
-
-
-# def date_sorting():
-#     date_list = []
-#     date_list1 = []
-#     for operations in exec_operations:
-#         for key, value in operations.items():
-#             if key == 'date':
-#                 print(type(value))
-#                 value = datetime.fromisoformat(value)
-#                 #date_list.append(value)
-#                 # sorted(date_list1)
-#                 print(type(value))
-#                 # operations['date'] = value
-#                 date_list.append(operations)
-#
-#     return date_list
-# print(date_sorting())
-# # print(type(date_sorting()[1]['date']))
-# # date_sort = date_sorting()
-# # print(date_sort[-5:])
-# # for i in date_sort:
-# #     print(i)
-#
-#
-#
-#
-#
-#
-# # print(executed_operations())
-# # b = executed_operations()
-# # for c in b:
-# #     print(c)
-#
