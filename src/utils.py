@@ -16,7 +16,7 @@ def executed_operations(data):
 
     execut_operations = []
     for v in data:
-        if 'state' in v and v['state'] == 'EXECUTED' and 'from' in v:
+        if 'state' in v and v['state'] == 'EXECUTED':
             execut_operations.append(v)
     return execut_operations
 
