@@ -1,11 +1,12 @@
 import json
 from datetime import datetime
+from path import Path
 
-
+DATA_DIR = Path(__file__).parent.parent.joinpath('operations.json')
 def open_file():
     """Открывает json файл и записывает его в переменную 'data' """
 
-    with open('../operations.json', 'r', encoding='UTF-8') as file:
+    with DATA_DIR.open(encoding='utf-8') as file:
         data = json.load(file)
     return data
 
