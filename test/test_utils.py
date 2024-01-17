@@ -2,13 +2,14 @@ from src.utils import open_file, executed_operations, get_last_values, enter_tra
 from src import main
 import json
 
-# def test_main():
-#     # main.main()
-#     # assert True
+def test_main():
+    main.main()
+    assert True
 
 def test_open_file():
-    with open('operations.json', 'r', encoding='UTF-8') as file:
-        data = json.load(file)
+    # with open('operations.json', 'r', encoding='UTF-8') as file:
+    #     data = json.load(file)
+    data = open_file()
     assert type(data) == list
 
 def test_executed_operations(test_data1):
@@ -61,8 +62,9 @@ def test_get_last_values(test_data2):
     ]
 
 def test_enter_transaction(test_data2):
-    assert enter_transaction(test_data2)[1] == '04.04.2019 Перевод со счета на счет\nСчет **8542 -> Счет **4188\n79114.93 USD \n\n '
-    assert enter_transaction(test_data2)[-1] == '03.01.2018 Перевод организации\nMasterCard 7158 30** **** 6751 -> MasterCard 7158 30** **** 6758\n8221.37 USD \n\n '
+    assert enter_transaction(test_data2)[1] == '04.04.2019 Перевод со счета на счет\nСчет **8542 -> Счет **4188\n79114.93 USD\n\n '
+    assert enter_transaction(test_data2)[-1] == '03.01.2018 Перевод организации\nMasterCard 7158 30** **** 6751 -> MasterCard 7158 30** **** 6758\n8221.37 USD\n\n '
+    assert enter_transaction(test_data2)[0] == '30.06.2018 Перевод организации\n -> \n9824.07 USD\n\n '
 
 
 

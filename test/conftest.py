@@ -48,7 +48,7 @@ def test_data2():
     return [
         {"date": "2018-06-30T02:08:58.425572",
          "description": "Перевод организации",
-         "from": "Счет 75106830613657916952",
+         # "from": "Счет 75106830613657916952",
          "id": 939719570,
          "operationAmount": {"amount": "9824.07",
              "currency": {"code": "USD", "name": "USD"}},
