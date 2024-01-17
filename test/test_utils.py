@@ -62,8 +62,9 @@ def test_get_last_values(test_data2):
     ]
 
 def test_enter_transaction(test_data2):
-    assert enter_transaction(test_data2)[1] == '04.04.2019 Перевод со счета на счет\nСчет **8542 -> Счет **4188\n79114.93 USD \n\n '
-    assert enter_transaction(test_data2)[-1] == '03.01.2018 Перевод организации\nMasterCard 7158 30** **** 6751 -> MasterCard 7158 30** **** 6758\n8221.37 USD \n\n '
+    assert enter_transaction(test_data2)[1] == '04.04.2019 Перевод со счета на счет\nСчет **8542 -> Счет **4188\n79114.93 USD\n\n '
+    assert enter_transaction(test_data2)[-1] == '03.01.2018 Перевод организации\nMasterCard 7158 30** **** 6751 -> MasterCard 7158 30** **** 6758\n8221.37 USD\n\n '
+    assert enter_transaction(test_data2)[0] == '30.06.2018 Перевод организации\n -> \n9824.07 USD\n\n '
 
 
 
