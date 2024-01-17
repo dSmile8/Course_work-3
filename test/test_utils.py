@@ -2,13 +2,14 @@ from src.utils import open_file, executed_operations, get_last_values, enter_tra
 from src import main
 import json
 
-# def test_main():
-#     # main.main()
-#     # assert True
+def test_main():
+    main.main()
+    assert True
 
 def test_open_file():
-    with open('operations.json', 'r', encoding='UTF-8') as file:
-        data = json.load(file)
+    # with open('operations.json', 'r', encoding='UTF-8') as file:
+    #     data = json.load(file)
+    data = open_file()
     assert type(data) == list
 
 def test_executed_operations(test_data1):
