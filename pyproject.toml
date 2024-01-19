@@ -8,7 +8,6 @@ packages = [{include = "cw_3"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-path = "^16.9.0"
 
 
 [tool.poetry.group.dev.dependencies]
